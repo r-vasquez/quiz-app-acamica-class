@@ -1,21 +1,32 @@
-import React, { useContext } from 'react'
-import { QuizContext } from '../../context/QuizContext'
+import React, { useContext } from "react";
+import { useState } from "react/cjs/react.development";
+import { QuizContext } from "../../context/QuizContext";
+import "./answerButton.css";
 
-function AnswerButton({text, isCorrect}) {
+function AnswerButton({ text, isCorrect }) {
+  const { setDisableNextBtn, answerSelected, setAnswerSelected, setCorrectAnswers } = useContext(QuizContext);
+  const [clicked, setClicked] = useState(false);
 
-    const {setDisableNextBtn} = useContext(QuizContext)
+  const handleAnswerClick = () => {
+    setClicked(true);
+    setAnswerSelected(true);
+    setDisableNextBtn(false);
+    if (isCorrect) {
+      setCorrectAnswers(prevState => prevState + 1)
+    } 
+  };
 
-    const handleAnswerClick = () => {
-        if (isCorrect) {
-            alert("Respuesta Correcta!")
-        } else {
-            alert("Incorrecto!") 
-        }
-        setDisableNextBtn(false)
-    }
-    return (
-        <button onClick={handleAnswerClick}>{text}</button>
-    )
+  const clickedClass = isCorrect ? "correct" : "wrong";
+
+  return (
+    <button
+      onClick={handleAnswerClick}
+      className={`answer-button ${clicked ? clickedClass : ""}`}
+      disabled={answerSelected}
+    >
+      {text}
+    </button>
+  );
 }
 
-export default AnswerButton
+export default AnswerButton;

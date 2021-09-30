@@ -1,0 +1,32 @@
+button.answer-button {
+    height: 40px;
+
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button.answer-button:hover,
+button.answer-button:focus {
+    background-color: rgb(184, 183, 183);
+}
+
+button.answer-button:active {
+    transform: scale(0.97);
+}
+
+button.answer-button.correct {
+    border: 2px solid rgb(124, 203, 6);
+}
+button.answer-button.correct:disabled,
+button.answer-button.wrong:disabled {
+    color: black;
+}
+
+button.answer-button.wrong {
+    border: 2px solid rgb(203, 42, 6);
+}
+
